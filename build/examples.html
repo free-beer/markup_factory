@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Markup Factory Examples</title>
+</head>
+
+<body>
+    <script type="module">
+        import MarkupFactory from '/js/markup_factory.min.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let definition;
+            let factory = new MarkupFactory();
+
+            definition = {events: {click: () => alert("This is an alert!")},
+                          nodeName: "button",
+                          text: "Show Alert",
+                          title: "Click to see an alert!",
+                          type: "button"};
+            document.body.appendChild(factory.build(definition));
+
+            definition = {children: [{nodeName: "h2",
+                                      text: "An example"},
+                                     {nodeName: "p",
+                                      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
+                                     {events: {click: () => alert("Just another click alert I'm afraid.")},
+                                      nodeName: "button",
+                                      text: "What's This?",
+                                      type: "button"}],
+                          id: "content",
+                          nodeName: "section"};
+            document.body.appendChild(factory.build(definition));
+
+            definition = {children: [{nodeName: "p", style: {color: "red", "font-weight": "bold", "font-size": "2em"}, text: "This text should be in large bold red characters!"}],
+                          nodeName: "section"};
+            document.body.appendChild(factory.build(definition));                          
+        })
+    </script>
+</body>
+</html>
